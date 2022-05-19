@@ -10,7 +10,7 @@
 //! and this example is therefore licensed under whatever terms are necessary to accomplish this.
 //! - thoth950@gmail.com
 
-use crate::timer_common::{debug_dump, WaveformGenerationMode};
+use crate::timer_common::WaveformGenerationMode;
 use arduino_hal::default_serial;
 use arduino_hal::hal::port::{PB1, PB2};
 use arduino_hal::pac::tc1::tccr1a::COM1A_A;
