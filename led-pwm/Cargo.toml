@@ -12,6 +12,12 @@ test = false
 bench = false
 
 [[bin]]
+name = "motor-pwm"
+path = "src/motor-pwm.rs"
+test = false
+bench = false
+
+[[bin]]
 name = "megalovania"
 path = "src/megalovania.rs"
 test = false
