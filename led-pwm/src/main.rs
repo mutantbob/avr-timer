@@ -1,6 +1,7 @@
 #![no_std]
 #![no_main]
 
+use arduino_hal::default_serial;
 use arduino_hal::pac::tc0::tccr0a::COM0A_A;
 use arduino_hal::pac::tc0::tccr0a::WGM0_A::PWM_PHASE;
 use arduino_hal::pac::tc0::tccr0b::CS0_A;
@@ -8,12 +9,11 @@ use arduino_hal::pac::tc1::tccr1a::COM1A_A;
 use arduino_hal::pac::tc1::tccr1b::CS1_A;
 use arduino_hal::pac::{TC0, TC1};
 use arduino_hal::port::Pin;
-use arduino_hal::{default_serial, delay_ms};
 use avr_hal_generic::port::mode::Io;
 use avr_hal_generic::port::PinOps;
 use avr_hal_generic::void;
 use panic_halt as _;
-use ufmt::{uWrite, uwrite, uwriteln, UnstableDoAsFormatter};
+use ufmt::{uWrite, uwrite, uwriteln};
 use void::Void;
 
 #[arduino_hal::entry]
