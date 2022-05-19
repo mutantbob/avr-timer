@@ -1,0 +1,62 @@
+[package]
+name = "led-pwm"
+version = "0.1.0"
+authors = ["Robert Forsman <git@thoth.purplefrog.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "led-pwm"
+test = false
+bench = false
+
+[[bin]]
+name = "megalovania"
+path = "src/megalovania.rs"
+test = false
+bench = false
+
+[dependencies]
+panic-halt = "0.2.0"
+ufmt = "0.1.0"
+nb = "0.1.2"
+embedded-hal = "0.2.3"
+avr-device = "*"
+
+[dependencies.void]
+version="*"
+default-features = false
+
+[dependencies.arduino-hal]
+git = "https://github.com/rahix/avr-hal"
+rev = "d0d2f243bd3e10b49f6a78d44839a6caa8be7d43"
+features = ["arduino-uno"]
+
+[dependencies.avr-hal-generic]
+git = "https://github.com/rahix/avr-hal"
+rev = "d0d2f243bd3e10b49f6a78d44839a6caa8be7d43"
+#features = ["arduino-uno"]
+
+[dependencies.rust-arduino-runtime]
+git="https://github.com/mutantbob/rust-arduino-helpers.git"
+branch="2022-mar-kludge"
+
+# Configure the build for minimal size - AVRs have very little program memory
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = "s"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = true
+lto = true
+opt-level = "s"
+
+
+[patch.crates-io]
+cty = { git="https://github.com/mutantbob/cty.git", branch="2022-Feb-avr" }
+#ufmt = { git = "https://github.com/mrk-its/ufmt.git", branch="ptr_width_16_fix" }
+#ufmt = { git = "https://github.com/mutantbob/ufmt.git", branch="hex_support" }
+ufmt = { path="../../ufmt" }
