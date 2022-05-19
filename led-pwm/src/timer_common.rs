@@ -34,18 +34,24 @@ pub fn debug_dump<W: uWrite>(serial: &mut W, timer1: &TC1) -> Result<(), <W as u
     serial.write_str("\n")
 }
 
+/// https://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061B.pdf
+/// table 16-4 Waveform Generation Mode Bit Description
+#[derive(Copy, Clone)]
 pub enum WaveformGenerationMode {
+    PWMPhaseCorrect10Bit,
     PWMPhaseCorrectICR1,
 }
 
 impl WaveformGenerationMode {
-    pub fn low_bits(&self) -> u8 {
+    pub const fn low_bits(&self) -> u8 {
         match self {
+            WaveformGenerationMode::PWMPhaseCorrect10Bit => 3,
             WaveformGenerationMode::PWMPhaseCorrectICR1 => 2,
         }
     }
-    pub fn high_bits(&self) -> u8 {
+    pub const fn high_bits(&self) -> u8 {
         match self {
+            WaveformGenerationMode::PWMPhaseCorrect10Bit => 0,
             WaveformGenerationMode::PWMPhaseCorrectICR1 => 2,
         }
     }
