@@ -4,7 +4,7 @@ use arduino_hal::pac::TC1;
 use panic_halt as _;
 use ufmt::{uWrite, uwrite};
 
-fn debug_dump<W: uWrite>(serial: &mut W, timer1: &TC1) -> Result<(), <W as uWrite>::Error> {
+pub fn debug_dump<W: uWrite>(serial: &mut W, timer1: &TC1) -> Result<(), <W as uWrite>::Error> {
     uwrite!(
         serial,
         "tccr1a = {}; tccr1b = {};",
